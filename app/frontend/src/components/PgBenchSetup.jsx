@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Form, Button, TextField, Content, View, Well  } from '@adobe/react-spectrum';
+import { Form, Button, TextField, Content, View, Well, ProgressCircle  } from '@adobe/react-spectrum';
 
 function PgBenchSetup() {
 
@@ -11,12 +11,14 @@ function PgBenchSetup() {
     const [databaseName,setDatabaseName] = useState("pgtest")
     const [scaling,setScaling] = useState(5);
     
+    const [loading, setLoading] = useState(false); 
     const [response,setResponse] = useState(null);
 
     const navigate = useNavigate();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        setLoading(true);
     
         //build the payload
         const payload = {
@@ -38,6 +40,8 @@ function PgBenchSetup() {
         } catch (error) {
             console.log("there's a problem");
             console.error(error);
+        } finally {
+            setLoading(false);
         }   
          
         return false; //blocker
@@ -64,6 +68,15 @@ function PgBenchSetup() {
                 <TextField label="Scaling (multiple of database size)" isRequired={true} value={scaling} onChange={setScaling}/>
                 <Button type="submit" maxWidth="size-1000">Save</Button>
             </Form>
+            {loading && (
+                <View marginTop="size-200" alignSelf="center">
+                    <ProgressCircle
+                        aria-label="Loading…"
+                        isIndeterminate
+                        size="L"
+                    />
+                </View>
+            )}  
             <View>
                 <Well marginTop="size-100">
                     <pre style={{

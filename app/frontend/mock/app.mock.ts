@@ -92,7 +92,33 @@ const mocks: MockHandler[] = [
                 "timeTaken": 0.6456905480008572
             }));
         }
-    },    
+    },
+    {
+        pattern: '/api/results',
+        method: 'GET',
+        handle: (req,res) => {
+            res.statusCode = 200,
+            res.end(JSON.stringify([
+                {
+                    "result": [
+                        "starting vacuum...end.",
+                        "transaction type: <builtin: TPC-B (sort of)>",
+                        "scaling factor: 5",
+                        "query mode: simple",
+                        "number of clients: 2",
+                        "number of threads: 2",
+                        "number of transactions per client: 100",
+                        "number of transactions actually processed: 200/200",
+                        "latency average = 4.310 ms",
+                        "tps = 464.004621 (including connections establishing)",
+                        "tps = 482.770159 (excluding connections establishing)"
+                    ],
+                    "timeTaken": 0.5039268040000024,
+                    "timestamp": "2025-05-17T16:48:42.476405"
+                }
+            ]));
+        }
+    }    
 ]
 
 export default mocks

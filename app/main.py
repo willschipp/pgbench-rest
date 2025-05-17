@@ -16,7 +16,7 @@ def serve(path):
 
 def main():
     app.run(
-        host="localhost",
+        host="0.0.0.0",
         port=5000,
         threaded=True,
     )

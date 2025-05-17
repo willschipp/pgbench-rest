@@ -1,4 +1,3 @@
-import { useState } from 'react'
 
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { Grid, View , defaultTheme, Provider, Content,ToastContainer } from '@adobe/react-spectrum';
@@ -9,9 +8,9 @@ import Menu from './components/Menu';
 import Home from './components/Home';
 import PgBenchSetup from './components/PgBenchSetup';
 import PgBenchExecute from './components/PgBenchExecute';
+import History from './components/History';
 
 function App() {
-  const [count, setCount] = useState(0)
 
   return (
     <Provider theme={defaultTheme}>
@@ -35,6 +34,7 @@ function App() {
                   <Route exact path="/" element={<Home/>}/>
                   <Route path="/setup" element={<PgBenchSetup/>}/>
                   <Route path="/execute" element={<PgBenchExecute/>}/>
+                  <Route path="/history" element={<History/>}/>
                 </Routes>
               </Content>
             </View>

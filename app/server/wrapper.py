@@ -4,6 +4,9 @@ import time
 import threading
 import queue
 import os
+from datetime import datetime
+
+from server.register import registerResult, getResults
 
 main = Blueprint('main',__name__)
 
@@ -33,7 +36,12 @@ def setup():
         password = data.get('password',password) #figure out protection
         database_name = data.get('databaseName',database_name)
         scaling = data.get('scaling',scaling)
-        
+
+    # check password
+    if len(password) <= 0 or password == "":
+        return jsonify({
+            "error":"no password sent"
+        }),503        
     
     # substitute
     command = CREATE_SET.replace('HOST',host).replace('PORT',str(port)).replace('USERNAME',username).replace('PWD',password).replace('SCALING',str(scaling)).replace('DATABASE_NAME',database_name)
@@ -129,7 +137,13 @@ def execute():
         clients = data.get('clients',clients)
         threads = data.get('threads',threads)
         transactions = data.get('transactions',transactions)
-    
+
+    # check password
+    if len(password) <= 0 or password == "":
+        return jsonify({
+            "error":"no password sent"
+        }),503
+
     # EXECUTE_SET = "PGPASSWORD='PWD' pgbench -h HOST -p PORT -U USERNAME -c CLIENTS -j THREADS -t TRANSACTIONS DATABASE_NAME"
     # substitute
     command = EXECUTE_SET.replace('HOST',host).replace('PORT',str(port)).replace('USERNAME',username).replace('CLIENTS',str(clients))
@@ -154,7 +168,23 @@ def execute():
 
     print(f"finished {elapsed_time}")
 
-    return jsonify({
+    # build there response object
+    result = {
         "result":lines,
-        "timeTaken":elapsed_time
-    }),200
+        "timeTaken":elapsed_time,
+        "timestamp":datetime.now().isoformat()
+    }
+
+    # register
+    registerResult(result)
+    
+    # return
+    return jsonify(result),200
+
+@main.route('/api/results',methods=['GET'])
+def results():
+    results = getResults()
+    if len(results) <= 0:
+        return "",404
+    
+    return jsonify(results),200

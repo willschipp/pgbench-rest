@@ -1,0 +1,11 @@
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: postgres-connection
+  namespace: postgres-performance
+  labels:
+    app: postgres-connection
+data:
+  SPRING_DATASOURCE_URL: jdbc:postgresql://localhost:5432/ps_db
+  SPRING_DATASOURCE_USERNAME: ps_user
+  SPRING_DATASOURCE_PASSWORD: SecurePassword
