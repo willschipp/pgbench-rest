@@ -142,6 +142,7 @@ def execute():
     
     lines = []
 
+    print("starting...")
     # execute the command and wait
     start_time = time.perf_counter()
     end_time = 0
@@ -150,6 +151,8 @@ def execute():
     end_time = time.perf_counter()
 
     elapsed_time = end_time - start_time
+
+    print(f"finished {elapsed_time}")
 
     return jsonify({
         "result":lines,
