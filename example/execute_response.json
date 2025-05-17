@@ -1,0 +1,16 @@
+{
+    "result": [
+        "starting vacuum...end.",
+        "transaction type: <builtin: TPC-B (sort of)>",
+        "scaling factor: 5",
+        "query mode: simple",
+        "number of clients: 2",
+        "number of threads: 2",
+        "number of transactions per client: 100",
+        "number of transactions actually processed: 200/200",
+        "latency average = 5.722 ms",
+        "tps = 349.528460 (including connections establishing)",
+        "tps = 356.863629 (excluding connections establishing)"
+    ],
+    "timeTaken": 0.6456905480008572
+}
