@@ -2,9 +2,11 @@ from flask import Flask, send_from_directory
 import os
 
 from server.wrapper import main as main_blueprint
+from server.select_interface import select as select_blueprint
 
 app = Flask(__name__,static_folder='frontend/dist')
 app.register_blueprint(main_blueprint)
+app.register_blueprint(select_blueprint)
 
 @app.route("/",defaults={"path":""})
 @app.route("/<path:path>")

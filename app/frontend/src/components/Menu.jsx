@@ -13,7 +13,9 @@ function Menu() {
         } else if (selection === 'execute') {
             navigate('/execute');
         } else if (selection === 'history') {
-            navigate('/history');            
+            navigate('/history');     
+        } else if (selection = 'browser') {
+            navigate('/browser');
         } else {
             navigate('/');
         }
@@ -32,6 +34,7 @@ function Menu() {
                 <Item key="setup">Setup</Item>
                 <Item key="execute">Execute</Item>
                 <Item key="history">History</Item>
+                <Item key="browser">Browser</Item>
             </ListBox>
         </Content>
     )

@@ -9,6 +9,7 @@ import Home from './components/Home';
 import PgBenchSetup from './components/PgBenchSetup';
 import PgBenchExecute from './components/PgBenchExecute';
 import History from './components/History';
+import Browser from './components/Browser';
 
 function App() {
 
@@ -35,6 +36,7 @@ function App() {
                   <Route path="/setup" element={<PgBenchSetup/>}/>
                   <Route path="/execute" element={<PgBenchExecute/>}/>
                   <Route path="/history" element={<History/>}/>
+                  <Route path="/browser" element={<Browser/>}/>
                 </Routes>
               </Content>
             </View>
